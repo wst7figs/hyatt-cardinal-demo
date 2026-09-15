@@ -1,5 +1,6 @@
-import { Check, ChevronDown } from 'lucide-react'
-import Media, { GarmentTrio, pickColor } from '../components/Media.jsx'
+import { ArrowRight, ChevronDown, Phone, Star } from 'lucide-react'
+import Media, { pickColor } from '../components/Media.jsx'
+import Estimator from '../components/Estimator.jsx'
 import { Button, Container, SectionHeader, Stars, TextLink } from '../components/Primitives.jsx'
 import {
   shop,
@@ -12,6 +13,8 @@ import {
   faqs,
   photos,
   reviewSummary,
+  trustStats,
+  clients,
 } from '../data.js'
 import { money } from '../shop/useCart.js'
 
@@ -23,50 +26,78 @@ function Section({ id, className = '', children }) {
   )
 }
 
-const HIGHLIGHTS = ['No minimum with DTG', '7 to 10 day turnaround', 'Free digital proof']
+const WORDMARKS = [
+  'text-[14px] font-extrabold uppercase tracking-[0.14em]',
+  'font-serif text-[18px] font-semibold italic',
+  'text-[13px] font-bold uppercase tracking-[0.24em]',
+  'text-[17px] font-extrabold tracking-[-0.03em]',
+  'text-[14px] font-semibold uppercase tracking-[0.1em]',
+  'font-serif text-[17px] font-bold',
+]
 
-export function Hero() {
+export function Hero({ onEstimate }) {
   return (
-    <section className="pt-6 sm:pt-8">
-      <Container>
-        <div className="grid overflow-hidden rounded-2xl border border-ink-700 bg-ink-850 lg:grid-cols-2">
-          <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
-            <h1 className="text-[34px] text-bone sm:text-[44px]">
-              Custom apparel, printed in house in Hamilton
-            </h1>
-            <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-bone-muted">
-              Screen printing, embroidery and direct to garment for teams, businesses and events.
-              You approve a free proof before anything is printed.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Button as="a" href="#quote" size="lg">
-                Get a free quote
-              </Button>
-              <Button as="a" href="#work" size="lg" variant="outline">
-                See our work
-              </Button>
-            </div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5">
-              {HIGHLIGHTS.map((h) => (
-                <li key={h} className="flex items-center gap-2 text-[14px] text-bone-muted">
-                  <Check size={16} className="text-volt-500" />
-                  {h}
-                </li>
-              ))}
-            </ul>
+    <section className="border-b border-ink-700 bg-ink-950">
+      <Container className="grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-16 lg:py-20">
+        <div>
+          <a
+            href="#reviews"
+            className="inline-flex items-center gap-2.5 rounded-full border border-ink-600 bg-ink-900 py-1.5 pl-1.5 pr-4 text-[13px] text-bone-muted transition-colors duration-150 hover:border-ink-500 hover:text-bone"
+          >
+            <span className="flex items-center gap-1 rounded-full bg-volt-500 px-2 py-0.5 text-[12px] font-bold text-ink-900">
+              <Star size={12} strokeWidth={0} className="fill-ink-900" />
+              {reviewSummary.rating}
+            </span>
+            Rated by {reviewSummary.count} customers on {reviewSummary.source}
+          </a>
+
+          <h1 className="mt-6 max-w-3xl text-[40px] font-extrabold leading-[1.03] tracking-[-0.035em] text-bone sm:text-[54px] xl:text-[64px]">
+            Branded apparel, printed in house and delivered on time.
+          </h1>
+          <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-bone-muted">
+            Screen printing, embroidery and direct to garment for teams, schools and businesses
+            across Ontario. Every order includes a free proof, and every quote comes back within one
+            business day.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button as="a" href="#quote" size="xl">
+              Start your quote
+              <ArrowRight size={18} />
+            </Button>
+            <Button as="a" href={shop.phoneHref} size="xl" variant="outline">
+              <Phone size={17} />
+              {shop.phone}
+            </Button>
           </div>
-          <GarmentTrio
-            src={photos.infoHero}
-            alt="Printed apparel from the shop"
-            className="aspect-[4/3] lg:aspect-auto lg:min-h-[460px]"
-          />
+
+          <div className="mt-10 grid max-w-xl grid-cols-3 border-t border-ink-700 pt-6">
+            {trustStats.map((s, i) => (
+              <div key={s.label} className={i === 0 ? 'pr-4' : 'border-l border-ink-700 px-4'}>
+                <p className="text-[24px] font-extrabold tracking-[-0.03em] text-bone sm:text-[30px]">{s.value}</p>
+                <p className="mt-0.5 text-[13px] leading-snug text-bone-muted">{s.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-4 flex flex-col items-center justify-center gap-1 rounded-xl bg-volt-500 px-5 py-3 text-center text-[14px] text-ink-900 sm:flex-row sm:gap-2">
-          <span className="font-semibold">Reorders have no setup fee.</span>
-          <span>Screens and embroidery files are kept on file for 24 months.</span>
-        </div>
+        <Estimator onContinue={onEstimate} />
       </Container>
+
+      <div className="border-t border-ink-700">
+        <Container className="flex flex-col items-center gap-5 py-7 lg:flex-row lg:justify-between lg:gap-10">
+          <p className="shrink-0 text-[13px] font-medium text-bone-faint">
+            Trusted by teams and businesses across Hamilton
+          </p>
+          <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-ink-400 lg:justify-end">
+            {clients.map((c, i) => (
+              <li key={c} className={WORDMARKS[i % WORDMARKS.length]}>
+                {c}
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </div>
     </section>
   )
 }

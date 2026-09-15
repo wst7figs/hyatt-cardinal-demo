@@ -160,6 +160,58 @@ export const photos = {
 
 export const reviewSummary = { rating: 4.9, source: 'Google' }
 
+/* Placeholder pricing model behind the hero estimate. Blank prices come from
+   the store products below; these are decoration costs per piece. */
+export const estimator = {
+  garments: [
+    { id: 'tee', label: 'T-shirt', formLabel: 'T-shirts', productId: 'hc-tee-heavy', garment: 'tee', color: '#1e1c1c' },
+    { id: 'hoodie', label: 'Hoodie', formLabel: 'Hoodies', productId: 'hc-hoodie-mid', garment: 'hoodie', color: '#2f4f43' },
+    { id: 'crew', label: 'Crewneck', formLabel: 'Crewnecks', productId: 'hc-crew', garment: 'crew', color: '#4a4f57' },
+    { id: 'cap', label: 'Cap', formLabel: 'Hats', productId: 'hc-cap-6panel', garment: 'cap', color: '#8f2733' },
+  ],
+  methods: [
+    {
+      id: 'screen',
+      label: 'Screen print',
+      service: 'Screen Printing',
+      minimum: 24,
+      perColour: true,
+      tiers: [{ min: 24, price: 2.2 }, { min: 72, price: 1.5 }, { min: 144, price: 1.1 }],
+    },
+    {
+      id: 'embroidery',
+      label: 'Embroidery',
+      service: 'Embroidery',
+      minimum: 12,
+      perColour: false,
+      tiers: [{ min: 12, price: 7.5 }, { min: 48, price: 6 }, { min: 144, price: 5 }],
+    },
+    {
+      id: 'dtg',
+      label: 'DTG',
+      service: 'Direct to Garment',
+      minimum: 1,
+      perColour: false,
+      tiers: [{ min: 1, price: 9 }, { min: 24, price: 7.5 }, { min: 72, price: 6.5 }],
+    },
+  ],
+}
+
+export const trustStats = [
+  { value: '18 yrs', label: 'Printing in Hamilton' },
+  { value: '2.4M+', label: 'Pieces printed' },
+  { value: '1 day', label: 'Quote turnaround' },
+]
+
+export const clients = [
+  'Steel City FC',
+  'Bramble Coffee',
+  'North End Skate',
+  'Harbour Trades Co',
+  'Cardinal Classic',
+  'Lakeshore Records',
+]
+
 /* ---- Store site -------------------------------------------------------- */
 
 export const categories = [

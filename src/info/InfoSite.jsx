@@ -113,11 +113,11 @@ function Header() {
 }
 
 export default function InfoSite() {
-  const [service, setService] = useState('')
+  const [prefill, setPrefill] = useState(null)
 
-  function requestQuote(name) {
-    setService(name)
-    document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' })
+  function requestQuote(details) {
+    setPrefill({ ...details, at: Date.now() })
+    requestAnimationFrame(() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' }))
   }
 
   return (
@@ -125,8 +125,8 @@ export default function InfoSite() {
       <UtilityBar />
       <Header />
       <main>
-        <Hero />
-        <Services onPick={requestQuote} />
+        <Hero onEstimate={(d) => requestQuote({ ...d, fromEstimate: true })} />
+        <Services onPick={(name) => requestQuote({ service: name })} />
         <Garments />
         <HowItWorks />
         <Methods />
@@ -134,7 +134,7 @@ export default function InfoSite() {
         <Work />
         <Reviews />
         <Faq />
-        <InfoContact service={service} setService={setService} />
+        <InfoContact prefill={prefill} />
         <About />
       </main>
       <SiteFooter variant="info" />

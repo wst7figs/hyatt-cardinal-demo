@@ -11,6 +11,7 @@ import {
   PackageCheck,
   ShieldCheck,
   Check,
+  ArrowRight,
 } from 'lucide-react'
 import Logo from '../components/Logo.jsx'
 import Media, { GarmentTrio, pickColor } from '../components/Media.jsx'
@@ -39,11 +40,22 @@ import ShopCatalog from './ShopCatalog.jsx'
 
 const PROMO_ICONS = { Truck, PenTool, PackageCheck, ShieldCheck }
 
-const STORE_TRIO = [
-  { type: 'tee', color: '#8f2733', cls: 'left-[7%] top-[18%] w-[44%]' },
-  { type: 'crew', color: '#4a4f57', cls: 'right-[8%] top-[8%] w-[44%]' },
-  { type: 'beanie', color: '#1e1c1c', cls: 'bottom-[4%] left-[40%] w-[24%]' },
+const STORE_HERO = [
+  { type: 'tee', color: '#1e1c1c', print: 'HC', cls: 'left-[4%] top-[7%] w-[60%]' },
+  { type: 'hoodie', color: '#2f4f43', cls: 'bottom-[5%] right-[3%] w-[62%]' },
 ]
+
+const HERO_TILES = [
+  { category: 'fleece', eyebrow: 'Best seller', title: 'Hoodies and crewnecks', garment: 'hoodie', color: '#4a4f57' },
+  { category: 'headwear', eyebrow: 'Team orders', title: 'Caps and beanies', garment: 'cap', color: '#2b3a55' },
+]
+
+const lowestIn = (category) =>
+  Math.min(
+    ...products
+      .filter((p) => p.category === category)
+      .map((p) => (p.bulk?.length ? p.bulk[p.bulk.length - 1].price : p.price))
+  )
 
 const BULK_TRIO = [
   { type: 'hoodie', color: '#1e1c1c', cls: 'left-[8%] top-[16%] w-[42%]' },
@@ -209,33 +221,94 @@ function ShopHeader({ query, setQuery, category, cartCount, onOpenCart, onGoCate
 }
 
 function ShopHero({ onGoCategory }) {
+  const hoodie = products.find((p) => p.id === 'hc-hoodie-mid')
+
   return (
     <section className="pt-6 sm:pt-8">
       <Container>
-        <div className="grid overflow-hidden rounded-2xl border border-ink-700 bg-ink-850 lg:grid-cols-2">
-          <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
-            <h1 className="text-[34px] text-bone sm:text-[44px]">
-              Blank apparel, by the piece or by the box
-            </h1>
-            <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-bone-muted">
-              The same tees, hoodies and hats we print on in our shop. Buy them blank at bulk
-              prices, or ask us to print them for you.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Button size="lg" onClick={() => onGoCategory('all')}>
-                Shop all products
-              </Button>
-              <Button as="a" href="#bulk" size="lg" variant="outline">
-                See bulk pricing
-              </Button>
+        <div className="grid gap-4 lg:grid-cols-3">
+          <div className="overflow-hidden rounded-2xl border border-ink-700 bg-ink-850 lg:col-span-2">
+            <div className="grid h-full md:grid-cols-[1.05fr_0.95fr]">
+              <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-volt-500">
+                  Wholesale blanks
+                </p>
+                <h1 className="mt-3 text-[38px] font-extrabold leading-[1.03] tracking-[-0.035em] text-bone sm:text-[50px]">
+                  The blanks we print on, at bulk prices.
+                </h1>
+                <p className="mt-4 max-w-md text-[16px] leading-relaxed text-bone-muted">
+                  Heavyweight tees, fleece and headwear, stocked in Hamilton and shipped across Canada
+                  in 2 business days.
+                </p>
+                <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-5">
+                  <Button size="xl" onClick={() => onGoCategory('all')}>
+                    Shop all products
+                    <ArrowRight size={18} />
+                  </Button>
+                  <div>
+                    <p className="text-[13px] text-bone-muted">T-shirts from</p>
+                    <p className="text-[22px] font-extrabold tracking-[-0.02em] text-bone">
+                      {money(lowestIn('tees'))}
+                      <span className="ml-1.5 text-[13px] font-medium tracking-normal text-bone-muted">
+                        in bulk
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative">
+                <GarmentTrio
+                  src={photos.storeHero}
+                  alt="Blank tee and hoodie from the store"
+                  items={STORE_HERO}
+                  className="h-full min-h-[300px]"
+                />
+                <div className="absolute bottom-4 left-4 rounded-xl bg-ink-900 px-4 py-3 shadow-[0_12px_30px_-10px_rgba(0,0,0,0.6)]">
+                  <p className="text-[12px] text-bone-muted">{hoodie.name}</p>
+                  <p className="text-[16px] font-bold text-bone">
+                    From {money(hoodie.bulk[hoodie.bulk.length - 1].price)}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <GarmentTrio
-            src={photos.storeHero}
-            alt="Blank garments from the store"
-            items={STORE_TRIO}
-            className="aspect-[4/3] lg:aspect-auto lg:min-h-[440px]"
-          />
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
+            {HERO_TILES.map((t) => (
+              <button
+                key={t.category}
+                type="button"
+                onClick={() => onGoCategory(t.category)}
+                className="group flex min-h-[190px] overflow-hidden rounded-2xl border border-ink-700 bg-ink-850 text-left transition-colors duration-150 hover:border-ink-500"
+              >
+                <div className="flex flex-1 flex-col justify-between p-6">
+                  <div>
+                    <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-bone-faint">
+                      {t.eyebrow}
+                    </p>
+                    <h2 className="mt-2 text-[21px] font-bold leading-tight tracking-[-0.02em] text-bone">
+                      {t.title}
+                    </h2>
+                    <p className="mt-1.5 text-[14px] text-bone-muted">
+                      From <span className="font-semibold text-bone">{money(lowestIn(t.category))}</span>
+                    </p>
+                  </div>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-bone underline-offset-4 group-hover:underline">
+                    Shop now
+                    <ArrowRight size={15} />
+                  </span>
+                </div>
+                <Media
+                  garment={t.garment}
+                  color={t.color}
+                  zoom
+                  pad="p-[14%]"
+                  className="w-[42%] shrink-0"
+                />
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="mt-4 grid gap-px overflow-hidden rounded-xl border border-ink-700 bg-ink-700 sm:grid-cols-2 lg:grid-cols-4">

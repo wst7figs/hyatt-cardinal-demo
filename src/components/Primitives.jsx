@@ -4,12 +4,14 @@ const SIZES = {
   sm: 'h-9 px-4 text-[13px]',
   md: 'h-11 px-5 text-[14px]',
   lg: 'h-12 px-6 text-[15px]',
+  xl: 'h-14 px-7 text-[16px]',
 }
 
 const VARIANTS = {
   primary: 'bg-volt-500 text-ink-900 hover:bg-volt-400',
   light: 'bg-bone text-ink-900 hover:bg-bone-muted',
   outline: 'border border-ink-500 text-bone hover:border-bone-faint hover:bg-ink-800',
+  ghost: 'text-bone-muted hover:bg-ink-800 hover:text-bone',
 }
 
 export function Button({
