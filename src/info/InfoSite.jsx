@@ -10,12 +10,10 @@ import {
   Services,
   Garments,
   HowItWorks,
-  Methods,
   ArtworkHelp,
   Work,
   Reviews,
   Faq,
-  About,
 } from './InfoSections.jsx'
 
 const NAV = [
@@ -129,13 +127,11 @@ export default function InfoSite() {
         <Services onPick={(name) => requestQuote({ service: name })} />
         <Garments />
         <HowItWorks />
-        <Methods />
         <ArtworkHelp />
         <Work />
         <Reviews />
         <Faq />
         <InfoContact prefill={prefill} />
-        <About />
       </main>
       <SiteFooter variant="info" />
     </div>

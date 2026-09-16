@@ -7,7 +7,6 @@ import {
   services,
   products,
   processSteps,
-  methods,
   workSamples,
   testimonials,
   faqs,
@@ -175,57 +174,18 @@ export function Garments() {
 export function HowItWorks() {
   return (
     <Section id="how-it-works">
-      <div className="rounded-2xl border border-ink-700 bg-ink-850 p-7 sm:p-10">
-        <SectionHeader
-          title="How ordering works"
-          description="Most orders are ready 7 to 10 business days after you approve the proof."
-        />
-        <ol className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {processSteps.map((s, i) => (
-            <li key={s.title}>
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-volt-500 text-[15px] font-bold text-ink-900">
-                {i + 1}
-              </span>
-              <h3 className="mt-4 text-[17px] text-bone">{s.title}</h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-bone-muted">{s.body}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </Section>
-  )
-}
-
-const METHOD_ROWS = [
-  ['bestFor', 'Best for'],
-  ['minimum', 'Minimum order'],
-  ['colours', 'Colours'],
-  ['turnaround', 'Turnaround'],
-  ['pricing', 'Pricing'],
-]
-
-export function Methods() {
-  return (
-    <Section id="methods">
-      <SectionHeader
-        title="Choosing a print method"
-        description="Not sure which one fits? Send your artwork and we will recommend one in your quote."
-      />
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {methods.map((m) => (
-          <div key={m.name} className="rounded-xl border border-ink-700 bg-ink-850 p-6">
-            <h3 className="text-[18px] text-bone">{m.name}</h3>
-            <dl className="mt-4 divide-y divide-ink-700">
-              {METHOD_ROWS.map(([key, label]) => (
-                <div key={key} className="flex justify-between gap-6 py-2.5 text-[14px]">
-                  <dt className="shrink-0 text-bone-muted">{label}</dt>
-                  <dd className="text-right text-bone">{m[key]}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+      <SectionHeader title="How ordering works" />
+      <ol className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {processSteps.map((s, i) => (
+          <li key={s.title}>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-volt-500 text-[15px] font-bold text-ink-900">
+              {i + 1}
+            </span>
+            <h3 className="mt-4 text-[17px] text-bone">{s.title}</h3>
+            <p className="mt-2 text-[14px] leading-relaxed text-bone-muted">{s.body}</p>
+          </li>
         ))}
-      </div>
+      </ol>
     </Section>
   )
 }
@@ -365,43 +325,3 @@ export function Faq() {
   )
 }
 
-const ABOUT_POINTS = [
-  {
-    title: 'Printed in house',
-    body: 'Nothing is sent out to another shop. You are welcome to visit and see your order on press.',
-  },
-  {
-    title: 'Proof before print',
-    body: 'You approve colours, size and placement on a mockup before any screens are made.',
-  },
-  {
-    title: 'Easy reorders',
-    body: 'Screens and embroidery files are kept for 24 months, so reordering has no setup fee.',
-  },
-]
-
-export function About() {
-  return (
-    <section className="mt-2 border-t border-ink-700 py-10 sm:py-12">
-      <Container>
-        <h2 className="text-[18px] text-bone">
-          {shop.name}: printing apparel in Hamilton since {shop.since}
-        </h2>
-        <p className="mt-3 max-w-4xl text-[14px] leading-relaxed text-bone-muted">
-          We are a screen printing and embroidery shop on Barton Street East. Sports clubs,
-          restaurants, trades companies, schools and clothing brands send us their artwork, and we
-          print it on garments we stock and trust. Every job is printed, checked and packed by the
-          same people you speak to on the phone.
-        </p>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
-          {ABOUT_POINTS.map((a) => (
-            <div key={a.title}>
-              <h3 className="text-[15px] text-bone">{a.title}</h3>
-              <p className="mt-1.5 text-[14px] leading-relaxed text-bone-muted">{a.body}</p>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </section>
-  )
-}

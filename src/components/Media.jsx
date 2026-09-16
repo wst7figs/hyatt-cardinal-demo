@@ -1,6 +1,6 @@
 import Garment, { luminance } from './Garment.jsx'
 
-const SHADOW = 'drop-shadow-[0_12px_14px_rgba(0,0,0,0.16)]'
+const SHADOW = ''
 
 /* Very light garments disappear against the studio backdrop, so tiles lead with a darker colourway */
 export function pickColor(colors) {

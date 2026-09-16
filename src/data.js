@@ -11,7 +11,6 @@ export const shop = {
   name: 'Hyatt Cardinal Print & Press',
   shortName: 'Hyatt Cardinal',
   tagline: 'Screen printing, embroidery, and direct to garment.',
-  since: 2008,
   hoursShort: 'Open Monday to Friday from 8:30am',
   phone: '(905) 555-0142',
   phoneHref: 'tel:+19055550142',
@@ -66,12 +65,12 @@ export const processSteps = [
 ]
 
 export const workSamples = [
-  { title: 'Steel City FC', type: 'Kit and supporter tees', garment: 'tee', color: '#c8342f', method: 'Screen print, 3 colour', image: null },
-  { title: 'Bramble Coffee', type: 'Staff and retail hoodies', garment: 'hoodie', color: '#2f4f43', method: 'Embroidery, left chest', image: null },
-  { title: 'North End Skate', type: 'Winter drop', garment: 'crew', color: '#2b3a55', method: 'Screen print, 5 colour', image: null },
-  { title: 'Harbour Trades Co', type: 'Crew uniforms', garment: 'polo', color: '#1f1f1f', method: 'Embroidery and hem tag', image: null },
-  { title: 'Cardinal Classic', type: 'Tournament headwear', garment: 'cap', color: '#7a1f2b', method: '3D puff embroidery', image: null },
-  { title: 'Lakeshore Records', type: 'Tour merch run', garment: 'longsleeve', color: '#141414', method: 'Screen print, discharge', image: null },
+  { title: 'Steel City FC', type: 'Supporter tees', garment: 'tee', color: '#c8342f', method: 'Screen print, 3 colour', image: '/media/tee-white.jpg' },
+  { title: 'Bramble Coffee', type: 'Staff hoodies', garment: 'hoodie', color: '#2f4f43', method: 'Embroidery, left chest', image: '/media/hoodie-white.jpg' },
+  { title: 'North End Skate', type: 'Winter drop', garment: 'crew', color: '#2b3a55', method: 'Screen print, 5 colour', image: '/media/stack.jpg' },
+  { title: 'Harbour Trades Co', type: 'Crew uniforms', garment: 'polo', color: '#1f1f1f', method: 'Embroidery and hem tag', image: '/media/hangers.jpg' },
+  { title: 'Lakeshore Records', type: 'Tour merch run', garment: 'longsleeve', color: '#141414', method: 'Screen print, discharge', image: '/media/tee-black.jpg' },
+  { title: 'Cardinal Classic', type: 'Retail restock', garment: 'hoodie', color: '#7a1f2b', method: 'Screen print, 2 colour', image: '/media/hoodie-rack.jpg' },
 ]
 
 export const testimonials = [
@@ -122,40 +121,20 @@ export const faqs = [
   },
 ]
 
-export const methods = [
-  {
-    name: 'Screen printing',
-    bestFor: 'Bold logos and team shirts in larger runs',
-    minimum: '24 pieces',
-    colours: 'Up to 8 ink colours',
-    turnaround: '7 to 10 business days',
-    pricing: 'Lowest price per piece at volume',
-  },
-  {
-    name: 'Embroidery',
-    bestFor: 'Polos, hats and jackets for staff',
-    minimum: '12 pieces',
-    colours: 'Up to 15 thread colours',
-    turnaround: '7 to 10 business days',
-    pricing: 'Based on stitch count',
-  },
-  {
-    name: 'Direct to garment',
-    bestFor: 'Full colour artwork, photos and small runs',
-    minimum: 'No minimum',
-    colours: 'Unlimited',
-    turnaround: '3 to 5 business days',
-    pricing: 'Flat price per piece',
-  },
-]
-
 /* Real photos go in public/media. Set a path here, for example
-   infoHero: '/media/hero.jpg', and it replaces the illustration. */
+   infoHero: '/media/hero.jpg', and it replaces the illustration.
+
+   The current photos are free-licence placeholders from Pexels, to be swapped
+   for photography of real Hyatt Cardinal orders:
+     tee-white   Marina Podrez      hoodie-white  MART PRODUCTION
+     tee-black   Rachel Claire      hoodie-rack   Ron Lach
+     stack       Ron Lach           hangers       Nataliya Vaitkevich
+     tote        Artem Podrez       press         James Collington */
 export const photos = {
-  infoHero: null,
-  artwork: null,
-  storeHero: null,
-  bulk: null,
+  infoHero: '/media/stack.jpg',
+  artwork: '/media/press.jpg',
+  storeHero: '/media/hoodie-rack.jpg',
+  bulk: '/media/hangers.jpg',
 }
 
 export const reviewSummary = { rating: 4.9, source: 'Google' }
